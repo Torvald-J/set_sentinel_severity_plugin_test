@@ -25,22 +25,3 @@ paths:
       responses:
         200:
           description: Successful response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/SetSeverityResponse'
-components:
-  schemas:
-    SetSeverityResponse:
-      type: object
-      properties:
-        tickets:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-              name:
-                type: string
-      description: The ID and name of the updated Sentinel Incident
