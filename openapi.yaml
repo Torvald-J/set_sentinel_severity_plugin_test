@@ -1,0 +1,46 @@
+openapi: 3.0.1
+info:
+  title: Sentinel Set Incident Severity Plugin
+  description: Set the severity of a Sentinel incident.
+  version: "1.0"
+servers:
+  - url: https://prod-23.ukwest.logic.azure.com:443/workflows/4624330fd0d9401b976efdff50314aae/triggers/manual/paths
+paths:
+  /invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=BUPxEYTPzY3Ucry7ZOEWLvpLDODam6mU-VUsIrO0bOE:
+    get:
+      operationId: setSeverity
+      summary: Set the severity of a Sentinel incident
+      parameters:
+        - name: arm_incident_id
+          in: query
+          description: The full ARM Incident ID of a Sentinel Incident.
+          required: true
+          schema:
+            type: string
+        - name: severity
+          in: query
+          description: Severity to set Incident to. Can be Informational, Low, Medium, or High.
+          schema:
+            type: string
+      responses:
+        200:
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SetSeverityResponse'
+components:
+  schemas:
+    SetSeverityResponse:
+      type: object
+      properties:
+        tickets:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              name:
+                type: string
+      description: The ID and name of the updated Sentinel Incident
